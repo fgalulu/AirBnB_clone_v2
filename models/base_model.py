@@ -3,7 +3,7 @@
 import uuid
 import models
 from datetime import datetime
-from sqlalchemy import Column, String, Datetime
+from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 if models.storage_t == "db":
@@ -15,8 +15,8 @@ class BaseModel:
     """The BaseModel class from which future classes will be derived"""
     if models.storage_t == 'db':
         id = Column(String(60), primary_key=True)
-        created_at = Column(Datetime, default=datetime.utcnow)
-        updated_at = Column(Datetime, default=datetime.utcnow)
+        created_at = Column(DateTime, default=datetime.utcnow)
+        updated_at = Column(DateTime, default=datetime.utcnow)
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""

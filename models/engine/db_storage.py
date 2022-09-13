@@ -12,7 +12,7 @@ from models.state import State
 from models.user import User
 from os import getenv
 from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessiomaker
+from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {"Amenity": Amenity, "City": City, "Place": Place,
         "Review": Review, "State": State, "User": User}
@@ -58,11 +58,11 @@ class DBStorage:
 
     def delete(self, obj=None):
         """delete from current db session"""
-        of obj is not None:
+        if obj is not None:
             self._session.delete(obj)
 
     def reload(self):
-    """reload data from the db"""
+        """reload data from the db"""
         Base.metadata.create_all(self._engine)
         sess_factory = sessionmaker(bind=self._engine, expire_on_commit=False)
         Session = scope_session(sess_factory)
