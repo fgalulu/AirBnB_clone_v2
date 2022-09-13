@@ -15,7 +15,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {"Amenity": Amenity, "City": City, "Place": Place,
-        "Review": Review, "State": State, "User": User}
+           "Review": Review, "State": State, "User": User}
+
 
 class DBStorage:
     """Interactes with the MySQL database"""
@@ -30,16 +31,16 @@ class DBStorage:
         HBNB_MYSQL_DB = getenv("HBNB_MYSQL_DB")
         HBNB_ENV = getenv("HBNB_ENV")
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                     format(HBNB_MYSQL_USER, 
-                                            HBNB_MYSQL_PWD,
-                                            HBNB_MYSQL_HOST,
-                                            HBNB_MYSQL_DB))
+                                      format(HBNB_MYSQL_USER,
+                                             HBNB_MYSQL_PWD,
+                                             HBNB_MYSQL_HOST,
+                                             HBNB_MYSQL_DB))
         if HBNB_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """query on the current db session"""
-        new_dict ={}
+        new_dict = {}
         for cls_ in classes:
             if cls is None or cls is classes[cls_] or cls is cls_:
                 objs = self.__session.query(classes[cls_]).all()
@@ -67,4 +68,3 @@ class DBStorage:
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scope_session(sess_factory)
         self.__session = Session
-
