@@ -6,10 +6,13 @@ from datetime import datetime
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
+time = "%Y-%m-%dT%H:%M:%S.%f"
+
 if models.storage_t == "db":
     Base = declarative_base()
 else:
     Base = object
+
 
 class BaseModel:
     """The BaseModel class from which future classes will be derived"""
@@ -23,7 +26,7 @@ class BaseModel:
         if not kwargs:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.updated_at = self.created_at
 
         else:
             for key, value in kwargs.items():
