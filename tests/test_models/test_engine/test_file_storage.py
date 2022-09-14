@@ -6,7 +6,6 @@ from models import storage, storage_t
 import os
 
 
-@unittest.skipIf(storage_t == 'db', 'file storage')
 class test_fileStorage(unittest.TestCase):
     """ Class to test the file storage method """
 
