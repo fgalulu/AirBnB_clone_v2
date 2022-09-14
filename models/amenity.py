@@ -15,4 +15,4 @@ class Amenity(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         """initialize amenity"""
-        super.__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
