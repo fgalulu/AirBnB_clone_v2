@@ -10,7 +10,7 @@ class City(BaseModel, Base):
     """ The city class, contains state ID and name """
     if models.storage_t == "db":
         __tablename__ = 'cities'
-        state_id = Column(String(60), ForeignKey('state.id'), nullable=False)
+        state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
         name = Column(String(128), nullable=False)
         place = relationship("Place", backref="cities")
     else:
